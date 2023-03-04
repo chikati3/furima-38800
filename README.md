@@ -34,6 +34,7 @@
 ### Association
 - belongs_to :user
 - has_many :comments
+- has_one :sold_out
 
 ## sold_out(完売) テーブル
 | colum                | type        | options                        |
