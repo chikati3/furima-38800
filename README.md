@@ -43,14 +43,14 @@
 
 ### Association
 - belongs_to :user
-- belongs_to :exhibition_products
-- belongs_to :shipping_addresses
+- belongs_to :exhibition_product
+- belongs_to :shipping_address
 
 ## shipping_addresses(配送先住所) テーブル
 | colum                | type        | options                        |
 | -------------------- | ----------- | ------------------------------ |
 | post_code            | string      | null: false                    |
-| prefecture_id        | integer     | null: false                    |
+| delivery_area_id     | integer     | null: false                    |
 | municipalities       | string      | null: false                    |
 | address              | string      | null: false                    |
 | building_name        | string      |                                |
