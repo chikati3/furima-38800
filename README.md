@@ -44,7 +44,7 @@
 ### Association
 - belongs_to :user
 - belongs_to :exhibition_product
-- belongs_to :shipping_address
+- has_many :shipping_address
 
 ## shipping_addresses(配送先住所) テーブル
 | colum                | type        | options                        |
