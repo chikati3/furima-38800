@@ -10,9 +10,9 @@ class User < ApplicationRecord
   
   validates :nickname, presence: true
   validates :birthday, presence: true
-  
+
   #全角のみ
-  with_options presence: true, format: { with: /\A[ぁ-ゔァ-ヴ\p{Ideographic}a-zA-Z0-9]+\z/,
+  with_options presence: true, format: { with: /\A[ぁ-ゔァ-ヴ\p{Ideographic}ａ-ｚＡ-Ｚ０-９]+\z/,
                                       message: 'is invalid. Input full-width characters' } do
     validates :family_name
     validates :last_name
