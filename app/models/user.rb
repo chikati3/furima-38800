@@ -9,7 +9,6 @@ class User < ApplicationRecord
                               message: "is invalid. Include both letters and numbers" }
   
   validates :nickname, presence: true
-  validates :password_confirmation, presence: true
   validates :birthday, presence: true
 
   #全角ひらがな、全角カタカナ、漢字
