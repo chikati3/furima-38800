@@ -11,8 +11,8 @@ class User < ApplicationRecord
   validates :nickname, presence: true
   validates :birthday, presence: true
 
-  #全角のみ
-  with_options presence: true, format: { with: /\A[ぁ-ゔァ-ヴ\p{Ideographic}ａ-ｚＡ-Ｚ０-９]+\z/,
+  #全角ひらがな、全角カタカナ、漢字
+  with_options presence: true, format: { with: /\A(?:\p{Hiragana}|\p{Katakana}|[ー－]|[一-龠々])+\z/,
                                       message: 'is invalid. Input full-width characters' } do
     validates :family_name
     validates :last_name
