@@ -4,12 +4,13 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @article = Article.new
+    @exhibition_product = ExhibitionProduct.new
   end
 
   def create
-    @article = Article.new(article_params)
-    if @article.save
+    @exhibition_product = ExhibitionProduct.new(product_params)
+    binding.pry
+    if @exhibition_product.save
       redirect_to root_path
     else
       render :new
@@ -18,8 +19,8 @@ class ItemsController < ApplicationController
 
   private
 
-  def article_params
-    params.require(:article).permit(:name,:category_id)
+  def product_params
+    params.require(:exhibition_product).permit(:image, :product_name, :description_item, :category_id, :commodity_condition_id, :delivery_charge_id, :delivery_area_id, :delivery_day_id, :price).merge(user_id: current_user.id)
   end
   
 end

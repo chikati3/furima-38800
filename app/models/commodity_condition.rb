@@ -1,4 +1,4 @@
-class Commodity_condition < ActiveHash::Base
+class CommodityCondition < ActiveHash::Base
   self.data = [
     {id: 1, condition: '---'},
     {id: 2, condition: '新品、未使用'},
@@ -10,6 +10,6 @@ class Commodity_condition < ActiveHash::Base
   ]
 
 include ActiveHash::Associations
-has_many :articles
+has_many :exhibition_Products
 
 end
