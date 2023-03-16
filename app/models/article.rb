@@ -7,9 +7,4 @@ class Article < ApplicationRecord
   belongs_to :delivery_day
 
 
-  validates :category_id, numericality: { other_than: 1 , message: "can't be blank"} 
-  validates :commodity_condition_id, numericality: { other_than: 1 , message: "can't be blank"} 
-  validates :delivery_charge_id, numericality: { other_than: 1 , message: "can't be blank"} 
-  validates :delivery_area_id, numericality: { other_than: 1 , message: "can't be blank"} 
-  validates :delivery_day_id, numericality: { other_than: 1 , message: "can't be blank"} 
 end
