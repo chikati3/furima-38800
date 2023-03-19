@@ -57,7 +57,7 @@ RSpec.describe ExhibitionProduct, type: :model do
       it "価格が空では登録できない" do
         @exhibition_product.price = nil
         @exhibition_product.valid?
-        expect(@exhibition_product.errors.full_messages).to include("Price is not a number")
+        expect(@exhibition_product.errors.full_messages).to include("Price can't be blank")
       end
       it "価格が300未満でないと登録できない" do
         @exhibition_product.price = 299
@@ -68,6 +68,11 @@ RSpec.describe ExhibitionProduct, type: :model do
         @exhibition_product.price = 10_000_000
         @exhibition_product.valid?
         expect(@exhibition_product.errors.full_messages).to include("Price must be less than or equal to 9999999")
+      end
+      it "価格が整数でないと登録できない" do
+        @exhibition_product.price = 0.1
+        @exhibition_product.valid?
+        expect(@exhibition_product.errors.full_messages).to include("Price must be an integer")
       end
 
     end
