@@ -1,5 +1,7 @@
 class ExhibitionProduct < ApplicationRecord
   belongs_to :user
+  has_one_attached :image
+  validates :image, presence: true
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -8,9 +10,6 @@ class ExhibitionProduct < ApplicationRecord
   belongs_to :delivery_area
   belongs_to :delivery_day
 
-  has_one_attached :image
-  validates :image, presence: true
-
   validates :product_name, presence: true
   validates :description_item, presence: true
   validates :category_id,  numericality: { other_than: 1 , message: "can't be blank" }
@@ -18,6 +17,5 @@ class ExhibitionProduct < ApplicationRecord
   validates :delivery_charge_id,  numericality: { other_than: 1 , message: "can't be blank" }
   validates :delivery_area_id,  numericality: { other_than: 1 , message: "can't be blank" }
   validates :delivery_day_id,  numericality: { other_than: 1 , message: "can't be blank" }
-  validates :price, numericality: true, inclusion: { in: 300..9_999_999 }
-  validates :user_id, presence: true
+  validates :price, numericality:  { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 },format: { with: /\A[0-9]+\z/ }
 end
