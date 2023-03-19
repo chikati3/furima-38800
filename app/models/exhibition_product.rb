@@ -9,6 +9,7 @@ class ExhibitionProduct < ApplicationRecord
   belongs_to :delivery_day
 
   has_one_attached :image
+  validates :image, presence: true
 
   validates :product_name, presence: true
   validates :description_item, presence: true
@@ -17,6 +18,6 @@ class ExhibitionProduct < ApplicationRecord
   validates :delivery_charge_id,  numericality: { other_than: 1 , message: "can't be blank" }
   validates :delivery_area_id,  numericality: { other_than: 1 , message: "can't be blank" }
   validates :delivery_day_id,  numericality: { other_than: 1 , message: "can't be blank" }
-  validates :price, presence: true
+  validates :price, numericality: true, inclusion: { in: 300..9_999_999 }
   validates :user_id, presence: true
 end

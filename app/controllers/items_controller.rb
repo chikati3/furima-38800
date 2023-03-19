@@ -10,7 +10,6 @@ class ItemsController < ApplicationController
 
   def create
     @exhibition_product = ExhibitionProduct.new(product_params)
-    binding.pry
     if @exhibition_product.save
       redirect_to root_path
     else
