@@ -20,12 +20,12 @@ RSpec.describe ExhibitionProduct, type: :model do
         expect(@exhibition_product.errors.full_messages).to include("Image can't be blank")
       end
       it "商品名が空では登録できない" do
-        @exhibition_product.product_name = nil
+        @exhibition_product.product_name = ''
         @exhibition_product.valid?
         expect(@exhibition_product.errors.full_messages).to include("Product name can't be blank")
       end
       it "商品説明が空では登録できない" do
-        @exhibition_product.description_item = nil
+        @exhibition_product.description_item = ''
         @exhibition_product.valid?
         expect(@exhibition_product.errors.full_messages).to include("Description item can't be blank")
       end
