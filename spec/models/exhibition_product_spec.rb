@@ -75,15 +75,15 @@ RSpec.describe ExhibitionProduct, type: :model do
         expect(@exhibition_product.errors.full_messages).to include("Price must be an integer")
       end
       it "価格が全角数値では保存できない" do
-        model = ExhibitionProduct.new(price: '１０００')
-        expect(model.save).to be_falsey
+        @exhibition_product.price = '１０００'
+        @exhibition_product.valid?
+        expect(@exhibition_product.errors.full_messages).to include("Price is not a number")
       end
       it "userが紐付いていなければ登録できない" do
         @exhibition_product.user = nil
         @exhibition_product.valid?
         expect(@exhibition_product.errors.full_messages).to include("User must exist")
       end
-
     end
   end
 end
