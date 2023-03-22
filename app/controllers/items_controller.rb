@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
   
   def index
+    @exhibition_products = ExhibitionProduct.order(created_at: :DESC)
   end
 
   def new
