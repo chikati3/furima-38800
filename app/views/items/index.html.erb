@@ -147,7 +147,7 @@
                 <%= exhibition_product.product_name%>
               </h3>
               <div class='item-price'>
-                <span><%= exhibition_product.price %>円<br><%= DeliveryCharge.find(exhibition_product.delivery_charge_id).load %></span>
+                <span><%= exhibition_product.price %>円<br><%= exhibition_product.delivery_charge.load %></span>
                 <div class='star-btn'>
                   <%= image_tag "star.png", class:"star-icon" %>
                   <span class='star-count'>0</span>
