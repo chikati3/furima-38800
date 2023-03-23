@@ -131,7 +131,7 @@
       <%# 商品データあり %>
       <% @exhibition_products.each do |exhibition_product| %>
         <li class='list'>
-          <%= link_to "#" do %>
+          <%= link_to item_path(exhibition_product.id), method: :get do %>
             <div class='item-img-content'>
               <%= image_tag exhibition_product.image, class: "item-img" if exhibition_product.image.attached? %>
 
