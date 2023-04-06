@@ -8,13 +8,13 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @exhibition_product.image ,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
+      
+      <%# 売却表示 %>
       <% if @sold_outs.pluck(:exhibition_product_id).include?(@exhibition_product.id) %>
         <div class="sold-out">
           <span>Sold Out!!</span>
         </div>
       <% end %>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -32,10 +32,8 @@
     
     <%# ログインユーザー != 出品者 %>
     <% elsif user_signed_in? && @sold_outs.pluck(:exhibition_product_id).include?(@exhibition_product.id) == false %>
-    <%# 商品が売れていない場合はこちらを表示しましょう %>
-    <%= link_to "購入画面に進む", item_orders_path(@exhibition_product.id) ,class:"item-red-btn"%>
-    <%# //商品が売れていない場合はこちらを表示しましょう %>
-
+      <%# 購入できる %>
+      <%= link_to "購入画面に進む", item_orders_path(@exhibition_product.id) ,class:"item-red-btn"%>
     <% end %>
 
 
