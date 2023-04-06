@@ -8,7 +8,7 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @exhibition_product.image ,class:"item-box-img" %>
-      
+
       <%# 売却表示 %>
       <% if @sold_outs.pluck(:exhibition_product_id).include?(@exhibition_product.id) %>
         <div class="sold-out">
@@ -25,15 +25,17 @@
       </span>
     </div>
 
-    <% if user_signed_in? && current_user.id == @exhibition_product.user_id %>
-      <%= link_to "商品の編集", edit_item_path(@exhibition_product.id), method: :get, class: "item-red-btn" %>
-      <p class="or-text">or</p>
-      <%= link_to "削除", item_path(@exhibition_product.id), method: :delete, class:"item-destroy" %>
-    
-    <%# ログインユーザー != 出品者 %>
-    <% elsif user_signed_in? && @sold_outs.pluck(:exhibition_product_id).include?(@exhibition_product.id) == false %>
-      <%# 購入できる %>
-      <%= link_to "購入画面に進む", item_orders_path(@exhibition_product.id) ,class:"item-red-btn"%>
+    <%# 売却していない %>
+    <% if @sold_outs.pluck(:exhibition_product_id).include?(@exhibition_product.id) == false %>
+      <%# ログインユーザー == 出品者 %>
+      <% if user_signed_in? && current_user.id == @exhibition_product.user_id %>
+        <%= link_to "商品の編集", edit_item_path(@exhibition_product.id), method: :get, class: "item-red-btn" %>
+        <p class="or-text">or</p>
+        <%= link_to "削除", item_path(@exhibition_product.id), method: :delete, class:"item-destroy" %>
+      <%# ログインユーザー != 出品者 %>
+      <% elsif user_signed_in?%>
+        <%= link_to "購入画面に進む", item_orders_path(@exhibition_product.id) ,class:"item-red-btn"%>
+      <% end %>
     <% end %>
 
 
