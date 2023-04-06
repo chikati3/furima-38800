@@ -13,6 +13,7 @@ RSpec.describe AddressSold, type: :model do
       expect(@address_sold).to be_valid
     end
     it "建物名がなくても購入できる" do
+      @address_sold.building_name = nil
       expect(@address_sold).to be_valid
     end
   end
@@ -54,14 +55,29 @@ RSpec.describe AddressSold, type: :model do
       expect(@address_sold.errors.full_messages).to include("Telephone number can't be blank")
     end
     it "電話番号が９桁以下だと購入できない" do
-      @address_sold.telephone_number = ''
+      @address_sold.telephone_number = '12345678'
       @address_sold.valid?
       expect(@address_sold.errors.full_messages).to include("Telephone number is not")
     end
     it "電話番号が12桁以上だと購入できない" do
-      @address_sold.telephone_number = ''
+      @address_sold.telephone_number = '012345678912'
       @address_sold.valid?
       expect(@address_sold.errors.full_messages).to include("Telephone number is not")
+    end
+    it "電話番号には半角以外含まれている場合購入できない" do
+      @address_sold.telephone_number = '０９０１２３４５６７８'
+      @address_sold.valid?
+      expect(@address_sold.errors.full_messages).to include("Telephone number is not")
+    end
+    it "ユーザーが空だと購入できない" do
+      @address_sold.user_id = ''
+      @address_sold.valid?
+      expect(@address_sold.errors.full_messages).to include("User can't be blank")
+    end
+    it "商品が空だと購入できない" do
+      @address_sold.exhibition_product_id = ''
+      @address_sold.valid?
+      expect(@address_sold.errors.full_messages).to include("Exhibition product can't be blank")
     end
   end
 end
