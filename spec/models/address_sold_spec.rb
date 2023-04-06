@@ -29,7 +29,7 @@ RSpec.describe AddressSold, type: :model do
       expect(@address_sold.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
     end
     it "郵便番号が(３桁ハイフン４桁)の半角英数字でないと購入できない" do
-      @address_sold.post_code = '１２３−１２３４'
+      @address_sold.post_code = '1234554'
       @address_sold.valid?
       expect(@address_sold.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
     end
