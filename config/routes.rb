@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   resources :items
 
   resources :items, only: [:show] do
-    resources :orders, only: [:index]
+    resources :orders, only: [:index, :create]
   end
 end
