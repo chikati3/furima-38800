@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_exhibition_product, only: [:edit, :show, :update, :destroy]
   before_action :same_user, only: [:edit, :update, :destroy]
+  before_action :same_sold_out, only: [:index, :show]
   
   def index
     @exhibition_products = ExhibitionProduct.order(created_at: :DESC)
@@ -24,6 +25,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @sold_outs = SoldOut.all
+    if @sold_outs.pluck(:exhibition_product_id).include?(@exhibition_product.id)
+      redirect_to root_path
+    end
   end
 
   def update
@@ -51,6 +56,10 @@ class ItemsController < ApplicationController
 
   def same_user
     redirect_to root_path unless @exhibition_product.user_id == current_user.id
+  end
+
+  def same_sold_out
+    @sold_outs = SoldOut.all
   end
   
 end

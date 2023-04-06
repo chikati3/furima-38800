@@ -135,11 +135,12 @@
             <div class='item-img-content'>
               <%= image_tag exhibition_product.image, class: "item-img" if exhibition_product.image.attached? %>
 
-              <%# 商品が売れていればsold outを表示しましょう %>
-              <div class='sold-out'>
-                <span>Sold Out!!</span>
-              </div>
-              <%# //商品が売れていればsold outを表示しましょう %>
+              <%# 売却表示 %>
+              <% if @sold_outs.pluck(:exhibition_product_id).include?(exhibition_product.id) %>
+                <div class='sold-out'>
+                  <span>Sold Out!!</span>
+                </div>
+              <% end %>
 
             </div>
             <div class='item-info'>
