@@ -1,9 +1,12 @@
 class OrdersController < ApplicationController
-
+  before_action :authenticate_user!, only: [:index]
   before_action :set_exhibition_product, only: [:index, :create]
+  
 
   def index
     @address_sold = AddressSold.new
+    @sold_outs = SoldOut.all
+    top_page
   end
   
   def create
@@ -34,6 +37,12 @@ class OrdersController < ApplicationController
 
   def set_exhibition_product
     @exhibition_product = ExhibitionProduct.find(params[:item_id])
+  end
+
+  def top_page
+    if @sold_outs.pluck(:exhibition_product_id).include?(@exhibition_product.id) || current_user.id == @exhibition_product.user_id
+      redirect_to root_path
+    end
   end
 
 end
